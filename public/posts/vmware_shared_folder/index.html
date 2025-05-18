@@ -5,11 +5,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>xpimpmykali | xkat3rz blog</title>
-<meta name="keywords" content="OSCP, OSCP&#43;, xpimpmykali">
-<meta name="description" content="How to set up your Kali VM for OSCP">
+<title>Create shared folder in VMWare Workstation | xkat3rz blog</title>
+<meta name="keywords" content="vmware">
+<meta name="description" content="How to set up shared folder in VMWare Workstation Pro">
 <meta name="author" content="xkat3r">
-<link rel="canonical" href="http://localhost:1313/posts/xpimpmykali/">
+<link rel="canonical" href="http://localhost:1313/posts/vmware_shared_folder/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.45e028aa8ce0961349adf411b013ee39406be2c0bc80d4ea3fc04555f7f4611a.css" integrity="sha256-ReAoqozglhNJrfQRsBPuOUBr4sC8gNTqP8BFVff0YRo=" rel="preload stylesheet" as="style">
 <link rel="icon" href="http://localhost:1313/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
@@ -18,7 +18,7 @@
 <link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/xpimpmykali/">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/vmware_shared_folder/">
 <noscript>
     <style>
         #theme-toggle,
@@ -58,21 +58,19 @@
 </noscript>
   
 
-<meta property="og:url" content="http://localhost:1313/posts/xpimpmykali/">
+<meta property="og:url" content="http://localhost:1313/posts/vmware_shared_folder/">
   <meta property="og:site_name" content="xkat3rz blog">
-  <meta property="og:title" content="xpimpmykali">
-  <meta property="og:description" content="How to set up your Kali VM for OSCP">
+  <meta property="og:title" content="Create shared folder in VMWare Workstation">
+  <meta property="og:description" content="How to set up shared folder in VMWare Workstation Pro">
   <meta property="og:locale" content="en-us">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2025-02-22T00:00:00+00:00">
-    <meta property="article:modified_time" content="2025-02-22T00:00:00+00:00">
-    <meta property="article:tag" content="OSCP">
-    <meta property="article:tag" content="OSCP&#43;">
-    <meta property="article:tag" content="Xpimpmykali">
+    <meta property="article:published_time" content="2025-04-22T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-04-22T00:00:00+00:00">
+    <meta property="article:tag" content="Vmware">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="xpimpmykali">
-<meta name="twitter:description" content="How to set up your Kali VM for OSCP">
+<meta name="twitter:title" content="Create shared folder in VMWare Workstation">
+<meta name="twitter:description" content="How to set up shared folder in VMWare Workstation Pro">
 
 
 <script type="application/ld+json">
@@ -89,8 +87,8 @@
     {
       "@type": "ListItem",
       "position":  2 ,
-      "name": "xpimpmykali",
-      "item": "http://localhost:1313/posts/xpimpmykali/"
+      "name": "Create shared folder in VMWare Workstation",
+      "item": "http://localhost:1313/posts/vmware_shared_folder/"
     }
   ]
 }
@@ -99,24 +97,24 @@
 {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "headline": "xpimpmykali",
-  "name": "xpimpmykali",
-  "description": "How to set up your Kali VM for OSCP",
+  "headline": "Create shared folder in VMWare Workstation",
+  "name": "Create shared folder in VMWare Workstation",
+  "description": "How to set up shared folder in VMWare Workstation Pro",
   "keywords": [
-    "OSCP", "OSCP+", "xpimpmykali"
+    "vmware"
   ],
-  "articleBody": "I passed the OSCP and OSCP+ in late 2024 so to give back to the community, I made a tool to set up Kali VM with the essential tools needed for OSCP.\nDuring my preparation for the exam, I spent a lot of time figuring out which tools and versions to use which was frustrating and wasted valuable lab time. For example, I had issues with the latest version of SharpHound and BloodHound. So I had to downgrade and use the earlier versions to resolve incompatibility issues.\nAlso, there were so many potatoes to use for Windows SeImpersonate privilege. But I relied on only 3 potatoes for the win: GodPotato, PrintSpoofer and JuicyPotato-ng.\nThe versions and tools in xpimpmykali have been tried and tested on Kali Linux VMware 2024-4. I used these exact tools for my exam as well.\nTo run this tool, follow the steps below:\nTake a snapshot of the VM in case the installation doesn’t go well git clone https://github.com/xkat3rZ/xpimpmykali.git cd xpimpmykali sudo ./pimpmykali.sh Enter option menu ‘S’, enter ‘Y’ to confirm Wait for about 5-10 mins for the installation to complete Check that the tools are installed in the /opt directory ",
-  "wordCount" : "195",
+  "articleBody": "This guide will help you set up shared folders in VMWare Workstation Pro for UNIX guest VMs such as Kali Linux or Ubuntu.\nThere are 2 main steps to set up shared folders:\nIn VMWare settings, create a shared folder In the host machine, edit “Settings” of the VM -\u003e go to “Options” tab -\u003e go to “Shared Folders” row -\u003e Add a new shared folder In the guest VM, create a folder. This folder will contain the shared folder from the host machine In your guest VM, set up a shared folder Temporary shared folder Use vmhgfs-fuse command sudo vmhgfs-fuse .host:/ -o allow_other -o uid=1000 OR Use mount command sudo mount -t fuse.vmhgfs-fuse .host:/ /mnt/hgfs -o allow_other Permanent shared folder vim /etc/fstab Add this line: .host:/ /mnt/hgfs fuse.vmhgfs-fuse allow_other 0 0 Reload entry sudo systemctl daemon-reload sudo systemctl restart local-fs.target ",
+  "wordCount" : "142",
   "inLanguage": "en",
-  "datePublished": "2025-02-22T00:00:00Z",
-  "dateModified": "2025-02-22T00:00:00Z",
+  "datePublished": "2025-04-22T00:00:00Z",
+  "dateModified": "2025-04-22T00:00:00Z",
   "author":{
     "@type": "Person",
     "name": "xkat3r"
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "http://localhost:1313/posts/xpimpmykali/"
+    "@id": "http://localhost:1313/posts/vmware_shared_folder/"
   },
   "publisher": {
     "@type": "Organization",
@@ -189,29 +187,59 @@
   <header class="post-header">
     <div class="breadcrumbs"><a href="http://localhost:1313/">Home</a>&nbsp;»&nbsp;<a href="http://localhost:1313/posts/">Posts</a></div>
     <h1 class="post-title entry-hint-parent">
-      xpimpmykali
+      Create shared folder in VMWare Workstation
     </h1>
     <div class="post-description">
-      How to set up your Kali VM for OSCP
+      How to set up shared folder in VMWare Workstation Pro
     </div>
-    <div class="post-meta"><span title='2025-02-22 00:00:00 +0000 UTC'>February 22, 2025</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;xkat3r
+    <div class="post-meta"><span title='2025-04-22 00:00:00 +0000 UTC'>April 22, 2025</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;xkat3r
 
 </div>
   </header> 
 
-  <div class="post-content"><p>I passed the OSCP and OSCP+ in late 2024 so to give back to the community, I made a tool to set up Kali VM with the essential tools needed for OSCP.</p>
-<p>During my preparation for the exam, I spent a lot of time figuring out which tools and versions to use which was frustrating and wasted valuable lab time. For example, I had issues with the latest version of SharpHound and BloodHound. So I had to downgrade and use the earlier versions to resolve incompatibility issues.</p>
-<p>Also, there were so many potatoes to use for Windows SeImpersonate privilege. But I relied on only 3 potatoes for the win: GodPotato, PrintSpoofer and JuicyPotato-ng.</p>
-<p>The versions and tools in <a href="https://github.com/xkat3rZ/xpimpmykali">xpimpmykali</a> have been tried and tested on Kali Linux VMware 2024-4. I used these exact tools for my exam as well.</p>
-<p>To run this tool, follow the steps below:</p>
+  <div class="post-content"><p>This guide will help you set up shared folders in VMWare Workstation Pro for UNIX guest VMs such as Kali Linux or Ubuntu.</p>
+<p>There are 2 main steps to set up shared folders:</p>
 <ol>
-<li>Take a snapshot of the VM in case the installation doesn&rsquo;t go well</li>
-<li><code>git clone https://github.com/xkat3rZ/xpimpmykali.git</code></li>
-<li><code>cd  xpimpmykali</code></li>
-<li><code>sudo ./pimpmykali.sh</code></li>
-<li>Enter option menu &lsquo;S&rsquo;, enter &lsquo;Y&rsquo; to confirm</li>
-<li>Wait for about 5-10 mins for the installation to complete</li>
-<li>Check that the tools are installed in the <code>/opt</code> directory</li>
+<li>In VMWare settings, create a shared folder
+<ol>
+<li>In the host machine, edit &ldquo;Settings&rdquo; of the VM -&gt; go to &ldquo;Options&rdquo; tab -&gt; go to &ldquo;Shared Folders&rdquo; row -&gt; Add a new shared folder</li>
+<li>In the guest VM, create a folder. This folder will contain the shared folder from the host machine</li>
+</ol>
+</li>
+<li>In your guest VM, set up a shared folder
+<ol>
+<li>Temporary shared folder
+<ol>
+<li>Use <code>vmhgfs-fuse</code> command
+<ul>
+<li><code>sudo vmhgfs-fuse .host:/ &lt;shared_folder_name&gt; -o allow_other -o uid=1000</code></li>
+</ul>
+</li>
+<li>OR</li>
+<li>Use <code>mount</code> command
+<ul>
+<li><code>sudo mount -t fuse.vmhgfs-fuse .host:/ /mnt/hgfs -o allow_other</code></li>
+</ul>
+</li>
+</ol>
+</li>
+<li>Permanent shared folder
+<ol>
+<li><code>vim /etc/fstab</code>
+<ul>
+<li>Add this line: <code>.host:/ /mnt/hgfs fuse.vmhgfs-fuse allow_other 0 0</code></li>
+</ul>
+</li>
+<li>Reload entry
+<ul>
+<li><code>sudo systemctl daemon-reload</code></li>
+<li><code>sudo systemctl restart local-fs.target</code></li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+</li>
 </ol>
 
 
@@ -219,15 +247,13 @@
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="http://localhost:1313/tags/oscp/">OSCP</a></li>
-      <li><a href="http://localhost:1313/tags/oscp&#43;/">OSCP&#43;</a></li>
-      <li><a href="http://localhost:1313/tags/xpimpmykali/">Xpimpmykali</a></li>
+      <li><a href="http://localhost:1313/tags/vmware/">Vmware</a></li>
     </ul>
 <nav class="paginav">
-  <a class="prev" href="http://localhost:1313/posts/vmware_shared_folder/">
-    <span class="title">« Prev</span>
+  <a class="next" href="http://localhost:1313/posts/xpimpmykali/">
+    <span class="title">Next »</span>
     <br>
-    <span>Create shared folder in VMWare Workstation</span>
+    <span>xpimpmykali</span>
   </a>
 </nav>
 
